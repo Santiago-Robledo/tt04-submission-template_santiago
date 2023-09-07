@@ -39,18 +39,17 @@ module cdma (
     always @(*) begin
        if (!Seed_i) begin
             LED_o = 0;
-            C_Buff = 0;
        end else begin
             LED_o = 1;
-            C_Buff = 1;
        end
     end
+	
 //Suport assignments
-assign Gold = data1[4] ^ data2[4]; //Valid support
-assign CDMA = signal_i ^ Gold;
-//Primtive Buffer
-    bufif1 B1 (CDMA_o,CDMA,C_Buff);
+	assign Gold = data1[4] ^ data2[4]; //Valid support
+	assign CDMA = signal_i ^ Gold;
+
 //Outputs assignment
+	assign CDMA_o = CDMA;
     assign Gold_o = Gold;
     assign receptor_o = receptor_i ^ Gold;
 endmodule
