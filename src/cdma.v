@@ -2,7 +2,7 @@ module cdma (
   input       clk_i,
   input       set_i,
   input       signal_i,
-  input [3:0] seed_i, 
+  input [4:0] seed_i, 
   input       receptor_i,
   output      cdma_o,
   output      gold_o,
@@ -14,16 +14,16 @@ module cdma (
   reg [4:0] data2;
  
   always @(posedge clk_i, negedge set_i) begin
-    if (~set_i) begin
-      data1 <= {seed_i, seed_i[0]};
+    if (!set_i) begin
+      data1 <= seed_i;
     end else begin
       data1 <= {data1[3:0], (data1[4] ^ data1[3] ^ data1[2] ^ data1[1]) }; 
     end
   end
 
   always @(posedge clk_i, negedge set_i) begin
-    if (~set_i) begin
-      data2 <= {seed_i, seed_i[0]}; 
+    if (!set_i) begin
+      data2 <= seed_i; 
     end else begin
       data2 <= {data2[3:0], (data2[4] ^ data2[1]) };
     end
