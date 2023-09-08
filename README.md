@@ -7,10 +7,11 @@ The diagram is conformed in a single verilog file, it contains the following.
   * An XOR gate for the Modulus 2 addition between the Gold code sequence generetor and the recieved signal receptor_i.
   * A buffer to disconnect the CDMA_o if we input an invalid seed.
   * The system has the following inputs
-    * clk for the LSFR within the Gold sequence generator.
-    * set_i in order to load the seed into the LSFRs.
+    * clk_i for the LSFR within the Gold sequence generator.
+    * rst_i for reseting the flipflop values
+    * load_i in order to load the seed into the LSFRs.
     * signal_i is the input for the digital signal we are trying to transmit through CDMA.
-    * Seed_i [4:0] is the seed to load into the LSFRs.
+    * seed_i [4:0] is the seed to load into the LSFRs.
     * receptor_i is the input for the recieved signal obtained through the channel in order to decode it.
   * The system has the following outputs
       * LED_o it works as a simple indicator telling the user if it can transmit or not.
