@@ -4,6 +4,7 @@ module cdma (
   input       signal_i,
   input [4:0] seed_i, 
   input       receptor_i,
+  input 	  load_i
   output      cdma_o,
   output      gold_o,
   output      receptor_o,
@@ -16,6 +17,11 @@ module cdma (
   wire [4:0] data2_next;
   wire aux1;
   wire aux2;
+  wire [4:0] mux1;
+  wire [4:0] mux2;
+  
+  assign mux1 = (load_i) ? seed_i : data1_next;
+  assign mux2 = (load_i) ? seed_i : data2_next;  
   
   assign aux1 = data1[4] ^ data1[3] ^ data1[2] ^ data1[1];
   assign aux2 = data2[4] ^ data2[1];
@@ -27,7 +33,7 @@ module cdma (
     if (~rst_i) begin
       data1 <= 0;
     end else begin
-      data1 <= aux1; 
+      data1 <= mux1; 
     end
   end
 
@@ -35,7 +41,7 @@ module cdma (
     if (~rst_i) begin
       data2 <= 0; 
     end else begin
-      data2 <= aux2;
+      data2 <= mux2;
     end
   end
 
