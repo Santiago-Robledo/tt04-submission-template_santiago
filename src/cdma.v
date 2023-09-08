@@ -20,14 +20,14 @@ module cdma (
   wire [4:0] mux1;
   wire [4:0] mux2;
   
-  assign mux1 = (load_i) ? seed_i : data1_next;
-  assign mux2 = (load_i) ? seed_i : data2_next;  
-  
   assign aux1 = data1[4] ^ data1[3] ^ data1[2] ^ data1[1];
   assign aux2 = data2[4] ^ data2[1];
   
   assign data1_next = {data1[3:0], aux1};
   assign data2_next = {data2[3:0], aux2};
+  
+  assign mux1 = (load_i == 1'b1) ? seed_i : data1_next;
+  assign mux2 = (load_i == 1'b1) ? seed_i : data2_next;
   
   always @(posedge clk_i, posedge rst_i) begin
     if (~rst_i) begin
