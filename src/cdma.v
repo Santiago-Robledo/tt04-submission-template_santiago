@@ -30,22 +30,22 @@ module cdma (
   assign mux2 = (load_i == 1'b1) ? seed_i : data2_next;
   
   always @(posedge clk_i, posedge rst_i) begin
-    if (~rst_i) begin
-      data1 <= 0;
+    if (rst_i) begin
+      data1 <= 5'b00000;
     end else begin
       data1 <= mux1; 
     end
   end
 
   always @(posedge clk_i, posedge rst_i) begin
-    if (~rst_i) begin
-      data2 <= 0; 
+    if (rst_i) begin
+      data2 <= 5'b00000; 
     end else begin
       data2 <= mux2;
     end
   end
 
-  assign led_o  = (seed_i == 5'b11111) ? 1'b0 : 1'b1;
+  assign led_o  = (seed_i !== 5'b00000) ? 1'b0 : 1'b1;
   assign gold_o = data1[4] ^ data2[4];
   assign cdma_o = signal_i ^ gold_o;
   assign receptor_o = receptor_i ^ gold_o;
