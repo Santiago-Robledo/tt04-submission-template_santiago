@@ -4,7 +4,7 @@ module cdma (
   input       signal_i,
   input [4:0] seed_i, 
   input       receptor_i,
-  input 	  load_i
+  input 	  load_i,
   output      cdma_o,
   output      gold_o,
   output      receptor_o,
