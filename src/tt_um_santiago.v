@@ -26,7 +26,7 @@ module tt_um_santiago #( parameter MAX_COUNT = 24'd10_000_000 ) (
     .signal_i(ui_in[0]),
     .seed_i(ui_in[5:1]),
     .receptor_i(ui_in[6]),
-	.load_i(ui_in[7])
+	.load_i(ui_in[7]),
     .cdma_o(uio_out[0]),
     .gold_o(uio_out[1]),
     .receptor_o(uio_out[2]),
