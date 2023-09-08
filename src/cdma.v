@@ -1,6 +1,6 @@
 module cdma (
   input       clk_i,
-  input       set_i,
+  input       rst_i,
   input       signal_i,
   input [4:0] seed_i, 
   input       receptor_i,
@@ -12,26 +12,36 @@ module cdma (
 
   reg [4:0] data1;
   reg [4:0] data2;
- 
-  always @(posedge clk_i, negedge set_i) begin
-    if (!set_i) begin
-      data1 <= seed_i;
+  wire [4:0] data1_next;
+  wire [4:0] data2_next;
+  wire aux1;
+  wire aux2;
+  
+  assign aux1 = data1[4] ^ data1[3] ^ data1[2] ^ data1[1];
+  assign aux2 = data2[4] ^ data2[1];
+  
+  assign data1_next = {data1[3:0], aux1};
+  assign data2_next = {data2[3:0], aux2};
+  
+  always @(posedge clk_i, posedge rst_i) begin
+    if (~rst_i) begin
+      data1 <= 0;
     end else begin
-      data1 <= {data1[3:0], (data1[4] ^ data1[3] ^ data1[2] ^ data1[1]) }; 
+      data1 <= aux1; 
     end
   end
 
-  always @(posedge clk_i, negedge set_i) begin
-    if (!set_i) begin
-      data2 <= seed_i; 
+  always @(posedge clk_i, posedge rst_i) begin
+    if (~rst_i) begin
+      data2 <= 0; 
     end else begin
-      data2 <= {data2[3:0], (data2[4] ^ data2[1]) };
+      data2 <= aux2;
     end
   end
 
-  assign led_o  = (seed_i) ? 1'b0 : 1'b1;
-  assign cdma_o = signal_i ^ gold_o;
+  assign led_o  = (seed_i == 5'b11111) ? 1'b0 : 1'b1;
   assign gold_o = data1[4] ^ data2[4];
+  assign cdma_o = signal_i ^ gold_o;
   assign receptor_o = receptor_i ^ gold_o;
   
 endmodule
