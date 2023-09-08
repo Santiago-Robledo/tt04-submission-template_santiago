@@ -2,7 +2,7 @@
 # CDMA diagram description
 The diagram is conformed in a single verilog file, it contains the following.
   * Gold code sequence generator.
-  * A comparator to detect if we have a valid seed at the input Seed_i [3:0]
+  * A comparator to detect if we have a valid seed at the input Seed_i [4:0]
   * An XOR gate for the Modulus 2 addition between the Gold code sequence generetor and the signal to transmit signal_i.
   * An XOR gate for the Modulus 2 addition between the Gold code sequence generetor and the recieved signal receptor_i.
   * A buffer to disconnect the CDMA_o if we input an invalid seed.
