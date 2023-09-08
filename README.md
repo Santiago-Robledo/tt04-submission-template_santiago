@@ -10,7 +10,7 @@ The diagram is conformed in a single verilog file, it contains the following.
     * clk for the LSFR within the Gold sequence generator.
     * set_i in order to load the seed into the LSFRs.
     * signal_i is the input for the digital signal we are trying to transmit through CDMA.
-    * Seed_i [3:0] is the seed to load into the LSFRs.
+    * Seed_i [4:0] is the seed to load into the LSFRs.
     * receptor_i is the input for the recieved signal obtained through the channel in order to decode it.
   * The system has the following outputs
       * LED_o it works as a simple indicator telling the user if it can transmit or not.
