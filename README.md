@@ -71,7 +71,8 @@ To generate a CDMA signal, it's necessary to maintain 1 bit of information [0 or
 
 #Simulation on Modelsim
 
-![Alt text](https://github.com/Santiago-Robledo/tt04-CDMA-Spread-Spectrum/assets/143015883/4005fc24-08f0-4a15-ad44-9dfd33f714ea)
+![Alt text](https://github.com/Santiago-Robledo/tt04-submission-template_santiago/assets/143015883/1ebcd0b1-0ea0-47fb-84d8-5ed0224c5fb8)
+
 
 
 # Bibliography
